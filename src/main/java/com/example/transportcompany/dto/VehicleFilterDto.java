@@ -1,7 +1,6 @@
 package com.example.transportcompany.dto;
 
 public class VehicleFilterDto {
-    private Long id;
     private String brand;
     private String model;
     private String category;
@@ -9,7 +8,6 @@ public class VehicleFilterDto {
     private boolean hasTrailer;
 
     public VehicleFilterDto(Long id, String brand, String model, String category, String type, boolean hasTrailer) {
-        this.id = id;
         this.brand = brand;
         this.model = model;
         this.category = category;
@@ -18,14 +16,6 @@ public class VehicleFilterDto {
     }
 
     public VehicleFilterDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getBrand() {
