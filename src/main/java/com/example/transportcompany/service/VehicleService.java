@@ -34,6 +34,7 @@ public class VehicleService {
         Optional<String> modelOptional = filter.getModel();
         Optional<String> categoryOptional = filter.getCategory();
         Optional<String> typeOptional = filter.getType();
+        Optional<Integer> releaseYearOptional = filter.getReleaseYear();
         Optional<Boolean> hasTrailerOptional = filter.getHasTrailer();
 
         String queryString = "SELECT V FROM Vehicle V JOIN VehicleCategory C ON (V.category.id = C.id) " +
@@ -44,6 +45,7 @@ public class VehicleService {
         if (modelOptional.isPresent()) whereParams.add("V.model = '" + modelOptional.get() + "'");
         if (categoryOptional.isPresent()) whereParams.add("C.categoryName = '" + categoryOptional.get() + "'");
         if (typeOptional.isPresent()) whereParams.add("T.typeName = '" + typeOptional.get() + "'");
+        if (releaseYearOptional.isPresent()) whereParams.add("T.releaseYear = '" + releaseYearOptional.get() + "'");
         if (hasTrailerOptional.isPresent()) whereParams.add("V.hasTrailer = " + hasTrailerOptional.get());
 
         if (whereParams.isEmpty() == false) queryString += " WHERE " + String.join(" AND ", whereParams);
