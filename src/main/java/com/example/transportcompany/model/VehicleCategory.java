@@ -36,7 +36,4 @@ public class VehicleCategory {
 
     @Column(name = "category_name")
     private String categoryName;
-
-    @Column(name = "description")
-    private String description;
 }
