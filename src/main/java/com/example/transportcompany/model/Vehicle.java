@@ -1,5 +1,6 @@
 package com.example.transportcompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,14 +11,14 @@ public class Vehicle {
     @Column(name = "id")
     private Long id;
 
-    public Vehicle(Long id, String brand, String model, VehicleCategory category, String stateNumber, VehicleType type, int realiseCode, boolean hasTrailer) {
+    public Vehicle(Long id, String brand, String model, VehicleCategory category, String stateNumber, VehicleType type, int releaseYear, boolean hasTrailer) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.category = category;
         this.stateNumber = stateNumber;
         this.type = type;
-        this.releaseYear = realiseCode;
+        this.releaseYear = releaseYear;
         this.hasTrailer = hasTrailer;
     }
 
@@ -94,13 +95,15 @@ public class Vehicle {
     @Column(name = "model")
     private String model;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private VehicleCategory category;
 
     @Column(name = "state_number")
     private String stateNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id")
     private VehicleType type;
 
     @Column(name = "release_year")
