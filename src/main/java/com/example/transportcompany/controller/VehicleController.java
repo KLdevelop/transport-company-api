@@ -29,7 +29,7 @@ public class VehicleController {
         return vehicles.stream().map(MappingUtils::mapToVehicleDto).toList();
     }
 
-    @PostMapping("/filter")
+    @PostMapping("/vehicles/filter")
     @ResponseBody
     List<VehicleDto> filterVehicles(@RequestBody VehicleFilterDto filter) {
         final List<Vehicle> vehicles = vehicleService.filter(filter);
