@@ -10,13 +10,14 @@ public class VehicleDto {
     private int releaseYear;
     private boolean hasTrailer;
 
-    public VehicleDto(Long id, String brand, String model, String category, String stateNumber, String type, boolean hasTrailer) {
+    public VehicleDto(Long id, String brand, String model, String category, String stateNumber, String type, Integer releaseYear, boolean hasTrailer) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.category = category;
         this.stateNumber = stateNumber;
         this.type = type;
+        this.releaseYear = releaseYear;
         this.hasTrailer = hasTrailer;
     }
 
