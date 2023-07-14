@@ -1,13 +1,15 @@
 package com.example.transportcompany.dto;
 
-public class VehicleFilterDto {
-    private String brand;
-    private String model;
-    private String category;
-    private String type;
-    private boolean hasTrailer;
+import java.util.Optional;
 
-    public VehicleFilterDto(Long id, String brand, String model, String category, String type, boolean hasTrailer) {
+public class VehicleFilterDto {
+    private Optional<String> brand;
+    private Optional<String> model;
+    private Optional<String> category;
+    private Optional<String> type;
+    private Optional<Boolean> hasTrailer;
+
+    public VehicleFilterDto(Optional<String> brand, Optional<String> model, Optional<String> category, Optional<String> type, Optional<Boolean> hasTrailer) {
         this.brand = brand;
         this.model = model;
         this.category = category;
@@ -15,46 +17,43 @@ public class VehicleFilterDto {
         this.hasTrailer = hasTrailer;
     }
 
-    public VehicleFilterDto() {
-    }
-
-    public String getBrand() {
+    public Optional<String> getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Optional<String> brand) {
         this.brand = brand;
     }
 
-    public String getModel() {
+    public Optional<String> getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(Optional<String> model) {
         this.model = model;
     }
 
-    public String getCategory() {
+    public Optional<String> getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Optional<String> category) {
         this.category = category;
     }
 
-    public String getType() {
+    public Optional<String> getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Optional<String> type) {
         this.type = type;
     }
 
-    public boolean isHasTrailer() {
+    public Optional<Boolean> getHasTrailer() {
         return hasTrailer;
     }
 
-    public void setHasTrailer(boolean hasTrailer) {
+    public void setHasTrailer(Optional<Boolean> hasTrailer) {
         this.hasTrailer = hasTrailer;
     }
 }
