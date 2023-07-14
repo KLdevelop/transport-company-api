@@ -13,6 +13,7 @@ public class MappingUtils {
         vehicleDto.setCategory(vehicle.getCategory().getCategoryName());
         vehicleDto.setStateNumber(vehicle.getStateNumber());
         vehicleDto.setType(vehicle.getType().getTypeName());
+        vehicleDto.setReleaseYear(vehicle.getReleaseYear());
         vehicleDto.setHasTrailer(vehicle.getHasTrailer());
 
         return vehicleDto;

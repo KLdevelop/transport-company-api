@@ -7,6 +7,7 @@ public class VehicleDto {
     private String category;
     private String stateNumber;
     private String type;
+    private int releaseYear;
     private boolean hasTrailer;
 
     public VehicleDto(Long id, String brand, String model, String category, String stateNumber, String type, boolean hasTrailer) {
@@ -68,6 +69,14 @@ public class VehicleDto {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public boolean isHasTrailer() {
