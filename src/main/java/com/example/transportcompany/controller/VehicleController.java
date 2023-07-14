@@ -21,9 +21,16 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
 
+    @GetMapping("/vehicles")
+    @ResponseBody
+    List<VehicleDto> getAllVehicles() {
+        final List<Vehicle> vehicles = vehicleService.findAll();
+
+        return vehicles.stream().map(MappingUtils::mapToVehicleDto).toList();
+    }
+
     @PostMapping("/filter")
     @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
     List<VehicleDto> filterVehicles(@RequestBody VehicleFilterDto filter) {
         final List<Vehicle> vehicles = vehicleService.filter(filter);
 

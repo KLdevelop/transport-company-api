@@ -25,6 +25,10 @@ public class VehicleService {
         this.vehicleRepository = vehicleRepository;
     }
 
+    public List<Vehicle> findAll() {
+        return vehicleRepository.findAll();
+    }
+
     public List<Vehicle> filter(VehicleFilterDto filter) {
         Optional<String> brandOptional = filter.getBrand();
         Optional<String> modelOptional = filter.getModel();
