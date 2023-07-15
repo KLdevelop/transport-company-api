@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VehicleCategoryRepository extends JpaRepository<VehicleCategory, Long> {
+    VehicleCategory findVehicleCategoryByCategoryName(String categoryName);
 }

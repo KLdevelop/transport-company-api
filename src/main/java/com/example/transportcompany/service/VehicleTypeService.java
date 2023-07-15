@@ -19,4 +19,8 @@ public class VehicleTypeService {
     public List<VehicleType> findAll() {
         return typeRepository.findAll();
     }
+
+    public VehicleType findVehicleTypeByTypeName(String typeName) {
+        return typeRepository.findVehicleTypeByTypeName(typeName);
+    }
 }

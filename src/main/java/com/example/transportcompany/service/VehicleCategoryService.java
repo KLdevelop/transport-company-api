@@ -19,4 +19,8 @@ public class VehicleCategoryService {
     public List<VehicleCategory> findAll() {
         return categoryRepository.findAll();
     }
+
+    public VehicleCategory findVehicleCategoryByCategoryName(String categoryName) {
+        return categoryRepository.findVehicleCategoryByCategoryName(categoryName);
+    }
 }
