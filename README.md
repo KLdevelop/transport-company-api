@@ -74,7 +74,7 @@ INSERT INTO category(category_name) VALUES ('Внедорожник'),
 
 ### 3\. Заполнить application.properties
 
-Рядом с application.properties находится файл application.properties.origin, откуда можно скопировать шаблон для заполнения в соответсвии с подключенной БД.
+Рядом с application.properties находится файл application.properties.origin, откуда можно скопировать шаблон для заполнения в соответствии с подключенной БД.
 
 
 ## Запуск
