@@ -61,10 +61,9 @@ public class VehicleService {
         Optional<Vehicle> vehicleOptionalById = vehicleRepository.findById(vehicleDto.getId());
         Optional<Vehicle> vehicleOptionalByStateNumber = vehicleRepository.findVehicleByStateNumber(vehicleDto.getStateNumber());
 
-        if (vehicleOptionalById.isPresent()) {
-            if (!vehicleOptionalById.isPresent() || vehicleDto.getId() == vehicleOptionalByStateNumber.get().getId())
-                vehicleRepository.save(MappingUtils.mapToVehicle(vehicleDto));
-        } else if (vehicleOptionalById.isPresent()) {
+        if (vehicleOptionalById.isPresent() && (!vehicleOptionalById.isPresent() || vehicleDto.getId() == vehicleOptionalByStateNumber.get().getId())) {
+            vehicleRepository.save(MappingUtils.mapToVehicle(vehicleDto));
+        } else {
             throw new InvalidRequestException("Invalid data");
         }
     }
