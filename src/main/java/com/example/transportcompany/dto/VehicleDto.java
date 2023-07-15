@@ -23,6 +23,7 @@ public class VehicleDto {
     private String stateNumber;
 
     @NotNull
+    @NotEmpty
     private String type;
 
     @NotNull
