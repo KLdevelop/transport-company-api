@@ -45,7 +45,7 @@ public class VehicleService {
         if (modelOptional.isPresent()) whereParams.add("V.model = '" + modelOptional.get() + "'");
         if (categoryOptional.isPresent()) whereParams.add("C.categoryName = '" + categoryOptional.get() + "'");
         if (typeOptional.isPresent()) whereParams.add("T.typeName = '" + typeOptional.get() + "'");
-        if (releaseYearOptional.isPresent()) whereParams.add("T.releaseYear = '" + releaseYearOptional.get() + "'");
+        if (releaseYearOptional.isPresent()) whereParams.add("V.releaseYear = " + releaseYearOptional.get());
         if (hasTrailerOptional.isPresent()) whereParams.add("V.hasTrailer = " + hasTrailerOptional.get());
 
         if (whereParams.isEmpty() == false) queryString += " WHERE " + String.join(" AND ", whereParams);
