@@ -98,7 +98,7 @@ public class Vehicle {
     @JoinColumn(name = "category_id", nullable = false)
     private VehicleCategory category;
 
-    @Column(name = "state_number", nullable = false)
+    @Column(name = "state_number", nullable = false, unique = true)
     private String stateNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
