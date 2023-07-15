@@ -1,16 +1,37 @@
 package com.example.transportcompany.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public class VehicleDto {
     private Long id;
-    private String brand;
-    private String model;
-    private String category;
-    private String stateNumber;
-    private String type;
-    private int releaseYear;
-    private boolean hasTrailer;
 
-    public VehicleDto(Long id, String brand, String model, String category, String stateNumber, String type, Integer releaseYear, boolean hasTrailer) {
+    @NotNull
+    @NotEmpty
+    private String brand;
+
+    @NotNull
+    @NotEmpty
+    private String model;
+
+    @NotNull
+    @NotEmpty
+    private String category;
+
+    @NotNull
+    @NotEmpty
+    private String stateNumber;
+
+    @NotNull
+    private String type;
+
+    @NotNull
+    private Integer releaseYear;
+
+    @NotNull
+    private Boolean hasTrailer;
+
+    public VehicleDto(Long id, String brand, String model, String category, String stateNumber, String type, Integer releaseYear, Boolean hasTrailer) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -72,11 +93,11 @@ public class VehicleDto {
         this.type = type;
     }
 
-    public int getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(int releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -84,7 +105,7 @@ public class VehicleDto {
         return hasTrailer;
     }
 
-    public void setHasTrailer(boolean hasTrailer) {
+    public void setHasTrailer(Boolean hasTrailer) {
         this.hasTrailer = hasTrailer;
     }
 }
