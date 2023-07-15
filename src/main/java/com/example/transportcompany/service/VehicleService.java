@@ -43,14 +43,14 @@ public class VehicleService {
         String queryString = "SELECT V FROM Vehicle V JOIN VehicleCategory C ON (V.category.id = C.id) " + "JOIN VehicleType T ON (V.category.id = T.id)";
         List<String> whereParams = new ArrayList<>();
 
-        if (brandOptional.isPresent()) whereParams.add("V.brand = '" + brandOptional.get() + "'");
-        if (modelOptional.isPresent()) whereParams.add("V.model = '" + modelOptional.get() + "'");
-        if (categoryOptional.isPresent()) whereParams.add("C.categoryName = '" + categoryOptional.get() + "'");
-        if (typeOptional.isPresent()) whereParams.add("T.typeName = '" + typeOptional.get() + "'");
-        if (releaseYearOptional.isPresent()) whereParams.add("V.releaseYear = " + releaseYearOptional.get());
-        if (hasTrailerOptional.isPresent()) whereParams.add("V.hasTrailer = " + hasTrailerOptional.get());
+        brandOptional.ifPresent(s -> whereParams.add("V.brand = '" + s + "'"));
+        modelOptional.ifPresent(s -> whereParams.add("V.model = '" + s + "'"));
+        categoryOptional.ifPresent(s -> whereParams.add("C.categoryName = '" + s + "'"));
+        typeOptional.ifPresent(s -> whereParams.add("T.typeName = '" + s + "'"));
+        releaseYearOptional.ifPresent(integer -> whereParams.add("V.releaseYear = " + integer));
+        hasTrailerOptional.ifPresent(aBoolean -> whereParams.add("V.hasTrailer = " + aBoolean));
 
-        if (whereParams.isEmpty() == false) queryString += " WHERE " + String.join(" AND ", whereParams);
+        if (!whereParams.isEmpty()) queryString += " WHERE " + String.join(" AND ", whereParams);
 
         TypedQuery<Vehicle> vehicleQuery = entityManager.createQuery(queryString, Vehicle.class);
 
@@ -58,10 +58,12 @@ public class VehicleService {
     }
 
     public void editVehicle(VehicleDto vehicleDto) {
-        Optional<Vehicle> vehicleOptionalById = vehicleRepository.findById(vehicleDto.getId());
+        final long id = vehicleDto.getId();
+
+        Optional<Vehicle> vehicleOptionalById = vehicleRepository.findById(id);
         Optional<Vehicle> vehicleOptionalByStateNumber = vehicleRepository.findVehicleByStateNumber(vehicleDto.getStateNumber());
 
-        if (vehicleOptionalById.isPresent() && (!vehicleOptionalById.isPresent() || vehicleDto.getId() == vehicleOptionalByStateNumber.get().getId())) {
+        if (vehicleOptionalById.isPresent() && (vehicleOptionalByStateNumber.isEmpty() || id == vehicleOptionalByStateNumber.get().getId())) {
             vehicleRepository.save(MappingUtils.mapToVehicle(vehicleDto));
         } else {
             throw new InvalidRequestException("Invalid data");
