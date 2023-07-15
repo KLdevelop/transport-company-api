@@ -1,6 +1,5 @@
 package com.example.transportcompany.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +7,7 @@ import jakarta.persistence.*;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
     public Vehicle(Long id, String brand, String model, VehicleCategory category, String stateNumber, VehicleType type, int releaseYear, boolean hasTrailer) {
@@ -77,7 +76,7 @@ public class Vehicle {
         return releaseYear;
     }
 
-    public void setReleaseYear(int realiseCode) {
+    public void setReleaseYear(Integer realiseCode) {
         this.releaseYear = realiseCode;
     }
 
@@ -85,30 +84,30 @@ public class Vehicle {
         return hasTrailer;
     }
 
-    public void setHasTrailer(boolean hasTrailer) {
+    public void setHasTrailer(Boolean hasTrailer) {
         this.hasTrailer = hasTrailer;
     }
 
-    @Column(name = "brand")
+    @Column(name = "brand", nullable = false)
     private String brand;
 
-    @Column(name = "model")
+    @Column(name = "model", nullable = false)
     private String model;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     private VehicleCategory category;
 
-    @Column(name = "state_number")
+    @Column(name = "state_number", nullable = false)
     private String stateNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type_id", nullable = false)
     private VehicleType type;
 
-    @Column(name = "release_year")
-    private int releaseYear;
+    @Column(name = "release_year", nullable = false)
+    private Integer releaseYear;
 
-    @Column(name = "has_trailer")
-    private boolean hasTrailer;
+    @Column(name = "has_trailer", nullable = false)
+    private Boolean hasTrailer;
 }

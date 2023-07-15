@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class VehicleCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
     public VehicleCategory(Long id, String categoryName) {
@@ -34,6 +34,6 @@ public class VehicleCategory {
         this.categoryName = categoryName;
     }
 
-    @Column(name = "category_name")
+    @Column(name = "category_name", nullable = false)
     private String categoryName;
 }
