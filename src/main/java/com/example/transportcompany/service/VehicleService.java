@@ -5,6 +5,7 @@ import com.example.transportcompany.dto.VehicleFilterDto;
 import com.example.transportcompany.model.Vehicle;
 import com.example.transportcompany.repository.VehicleRepository;
 import com.example.transportcompany.util.MappingUtils;
+import com.example.transportcompany.util.exceptions.InvalidRequestException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -39,8 +40,7 @@ public class VehicleService {
         Optional<Integer> releaseYearOptional = filter.getReleaseYear();
         Optional<Boolean> hasTrailerOptional = filter.getHasTrailer();
 
-        String queryString = "SELECT V FROM Vehicle V JOIN VehicleCategory C ON (V.category.id = C.id) " +
-                             "JOIN VehicleType T ON (V.category.id = T.id)";
+        String queryString = "SELECT V FROM Vehicle V JOIN VehicleCategory C ON (V.category.id = C.id) " + "JOIN VehicleType T ON (V.category.id = T.id)";
         List<String> whereParams = new ArrayList<>();
 
         if (brandOptional.isPresent()) whereParams.add("V.brand = '" + brandOptional.get() + "'");
@@ -58,14 +58,23 @@ public class VehicleService {
     }
 
     public void editVehicle(VehicleDto vehicleDto) {
-        Optional<Vehicle> vehicleOptional = vehicleRepository.findById(vehicleDto.getId());
+        Optional<Vehicle> vehicleOptionalById = vehicleRepository.findById(vehicleDto.getId());
+        Optional<Vehicle> vehicleOptionalByStateNumber = vehicleRepository.findVehicleByStateNumber(vehicleDto.getStateNumber());
 
-        if (vehicleOptional.isPresent()) {
-            vehicleRepository.save(MappingUtils.mapToVehicle(vehicleDto));
+        if (vehicleOptionalById.isPresent()) {
+            if (!vehicleOptionalById.isPresent() || vehicleDto.getId() == vehicleOptionalByStateNumber.get().getId())
+                vehicleRepository.save(MappingUtils.mapToVehicle(vehicleDto));
+        } else if (vehicleOptionalById.isPresent()) {
+            throw new InvalidRequestException("Invalid data");
         }
     }
 
     public void addVehicle(VehicleDto vehicleDto) {
+        Optional<Vehicle> vehicleOptionalByStateNumber = vehicleRepository.findVehicleByStateNumber(vehicleDto.getStateNumber());
+
+        if (vehicleOptionalByStateNumber.isPresent())
+            throw new InvalidRequestException("This stateNumber is already exists");
+
         vehicleDto.setId(null);
 
         Vehicle vehicle = MappingUtils.mapToVehicle(vehicleDto);
