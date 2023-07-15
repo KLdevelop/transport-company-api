@@ -5,7 +5,9 @@ import com.example.transportcompany.dto.VehicleFilterDto;
 import com.example.transportcompany.model.Vehicle;
 import com.example.transportcompany.service.VehicleService;
 import com.example.transportcompany.util.MappingUtils;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +36,17 @@ public class VehicleController {
         final List<Vehicle> vehicles = vehicleService.filter(filter);
 
         return vehicles.stream().map(MappingUtils::mapToVehicleDto).toList();
+    }
+
+    @PutMapping("/vehicles/edit")
+    @ResponseStatus(HttpStatus.OK)
+    void editVehicle(@RequestBody @Valid VehicleDto vehicleDto) {
+        vehicleService.editVehicle(vehicleDto);
+    }
+
+    @PostMapping("/vehicles/new")
+    @ResponseStatus(HttpStatus.OK)
+    void addVehicle(@RequestBody @Valid VehicleDto vehicleDto) {
+        vehicleService.addVehicle(vehicleDto);
     }
 }

@@ -1,8 +1,10 @@
 package com.example.transportcompany.service;
 
+import com.example.transportcompany.dto.VehicleDto;
 import com.example.transportcompany.dto.VehicleFilterDto;
 import com.example.transportcompany.model.Vehicle;
 import com.example.transportcompany.repository.VehicleRepository;
+import com.example.transportcompany.util.MappingUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -53,5 +55,21 @@ public class VehicleService {
         TypedQuery<Vehicle> vehicleQuery = entityManager.createQuery(queryString, Vehicle.class);
 
         return vehicleQuery.getResultList();
+    }
+
+    public void editVehicle(VehicleDto vehicleDto) {
+        Optional<Vehicle> vehicleOptional = vehicleRepository.findById(vehicleDto.getId());
+
+        if (vehicleOptional.isPresent()) {
+            vehicleRepository.save(MappingUtils.mapToVehicle(vehicleDto));
+        }
+    }
+
+    public void addVehicle(VehicleDto vehicleDto) {
+        vehicleDto.setId(null);
+
+        Vehicle vehicle = MappingUtils.mapToVehicle(vehicleDto);
+
+        vehicleRepository.save(vehicle);
     }
 }
