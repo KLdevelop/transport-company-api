@@ -40,7 +40,7 @@ public class VehicleService {
         Optional<Integer> releaseYearOptional = filter.getReleaseYear();
         Optional<Boolean> hasTrailerOptional = filter.getHasTrailer();
 
-        String queryString = "SELECT V FROM Vehicle V JOIN VehicleCategory C ON (V.category.id = C.id) " + "JOIN VehicleType T ON (V.category.id = T.id)";
+        String queryString = "SELECT V FROM Vehicle V JOIN VehicleCategory C ON (V.category.id = C.id) JOIN VehicleType T ON (V.type.id = T.id)";
         List<String> whereParams = new ArrayList<>();
 
         brandOptional.ifPresent(s -> whereParams.add("V.brand = '" + s + "'"));
