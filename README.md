@@ -81,7 +81,8 @@ INSERT INTO category(category_name) VALUES ('Внедорожник'),
 
 После запуска по адресу http://localhost:8080/ будет доступна веб-страница
 
-![](https://33333.cdn.cke-cs.com/kSW7V9NHUXugvhoQeFaf/images/c80c6596f1974ae422bed6f7fa2e4b3b964e79d9d70c98a0.png)
+![](https://github.com/KLdevelop/transport-company-api/assets/41189290/d9593f7d-df33-4c2a-ade3-defedd8d913c)
+
 
 Фильтрация записей таблицы осуществляется с помощью нижней панели.
 
